@@ -89,4 +89,20 @@ public class BlogController {
         modelAndView.addObject("blogs", blogs);
         return modelAndView;
     }
+
+    @GetMapping("/category/{categoryId}")
+    public ModelAndView listBlogByCategory(@PathVariable Long categoryId, @PageableDefault(size = 5) Pageable pageable){
+        Optional<Category> categoryOptional = categoryService.findById(categoryId);
+        if (categoryOptional.isPresent()) {
+            Category category = categoryOptional.get();
+            Iterable<Blog> blogs = blogService.findAllByCategory(category);
+            ModelAndView modelAndView = new ModelAndView("/blog/index");
+            modelAndView.addObject("blogs", blogs);
+            modelAndView.addObject("category", category);
+            return modelAndView;
+        } else {
+            return new ModelAndView("/error_404");
+        }
+    }
+
 }

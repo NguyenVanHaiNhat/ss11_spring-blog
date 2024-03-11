@@ -26,7 +26,14 @@
         <span th:text="${success}"></span>
     </div>
 </div>
-
+<div>
+    <h4>Blog by Category</h4>
+    <ul>
+        <li th:each="category : ${categories}">
+            <a th:href="@{/blogs/category/{categoryId}(categoryId=${category.id})}" th:text="${category.nameCategory}"></a>
+        </li>
+    </ul>
+</div>
 <table id = "blogs">
     <thead>
     <tr>
@@ -47,7 +54,8 @@
         <td th:text="${b.getContent()}"></td>
         <td th:text="${b.getAuthor()}"></td>
         <td th:text="${b.getDayOfWrite()}"></td>
-        <td th:text="${b.getCategory().getNameCategory()}"></td>
+        <td th:if="${b.getCategory() != null}" th:text="${b.getCategory().getNameCategory()}"></td>
+        <td th:if="${b.getCategory() == null}">No Category</td>
         <td><a th:href="@{/blogs/update/{id}(id=${b.getId()})}">update</a></td>
         <td><a th:href="@{/blogs/delete/{id}(id=${b.getId()})}">delete</a></td>
     </tr>
