@@ -14,14 +14,11 @@ public class Blog {
     private String author;
     private Date dayOfWrite;
 
-    public Blog() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public Blog(String title, String content, String author, Date dayOfWrite) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-        this.dayOfWrite = dayOfWrite;
+    public Blog() {
     }
 
     public Long getId() {
@@ -62,5 +59,13 @@ public class Blog {
 
     public void setDayOfWrite(Date dayOfWrite) {
         this.dayOfWrite = dayOfWrite;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -1,9 +1,12 @@
 package org.example.springblog.service.impl;
 
 import org.example.springblog.model.Blog;
+import org.example.springblog.model.Category;
 import org.example.springblog.repository.IBlogRepository;
 import org.example.springblog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,5 +34,15 @@ public class BlogService implements IBlogService {
     @Override
     public Optional<Blog> findById(Long id) {
         return blogRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Blog> findAllByCategory(Category category) {
+        return blogRepository.findAllByCategory(category);
+    }
+
+    @Override
+    public Page<Blog> findAll(Pageable pageable) {
+        return blogRepository.findAll(pageable);
     }
 }
