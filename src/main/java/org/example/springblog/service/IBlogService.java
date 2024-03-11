@@ -1,4 +1,6 @@
 package org.example.springblog.service;
 
-public interface IBlogService {
+import org.example.springblog.model.Blog;
+
+public interface IBlogService extends IGeneralService<Blog> {
 }
