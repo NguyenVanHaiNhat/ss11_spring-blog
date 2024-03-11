@@ -32,7 +32,7 @@ public class CategoryController {
     @GetMapping("/create")
     public ModelAndView createNewCategory(){
         ModelAndView modelAndView = new ModelAndView("/category/create");
-        modelAndView.addObject("category", new Category());
+        modelAndView.addObject("categories", new Category());
         return modelAndView;
     }
 
@@ -48,14 +48,14 @@ public class CategoryController {
         Optional<Category> category = categoryService.findById(id);
         if (category.isPresent()){
             ModelAndView modelAndView = new ModelAndView("/category/edit");
-            modelAndView.addObject("category", category.get());
+            modelAndView.addObject("categories", category.get());
             return modelAndView;
         } else
             return new ModelAndView("/error_404");
     }
 
     @PostMapping("/update/{id}")
-    private String update(@PathVariable("category") Category category, RedirectAttributes redirectAttributes){
+    private String update(@ModelAttribute("categories") Category category, RedirectAttributes redirectAttributes){
         categoryService.save(category);
         redirectAttributes.addFlashAttribute("success", "update category successfully");
         return "redirect:/categories";
@@ -75,7 +75,7 @@ public class CategoryController {
             return new ModelAndView("/error_404");
         }
         Iterable<Blog> blogs = blogService.findAllByCategory(category.get());
-        ModelAndView modelAndView = new ModelAndView("/category/view");
+        ModelAndView modelAndView = new ModelAndView("/category/index");
         modelAndView.addObject("blogs", blogs);
         return modelAndView;
     }

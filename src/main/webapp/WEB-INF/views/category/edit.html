@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>Update Category</title>
 </head>
 <body>
-
+<h3>Update Category</h3>
+<p>
+    <a th:href="@{/categories}">
+        Back to category list
+    </a>
+</p>
+<div id="form">
+    <form th:action="@{/categories/update/{id}(id=${categories.getId()})}" th:object="${categories}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{nameCategory}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

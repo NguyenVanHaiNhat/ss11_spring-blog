@@ -9,4 +9,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface IBlogRepository extends CrudRepository<Blog, Long> {
     Iterable<Blog> findAllByCategory(Category category);
     Page<Blog> findAll(Pageable pageable);
+    Page<Blog> findAllByTitleContaining(Pageable pageable, String title);
 }

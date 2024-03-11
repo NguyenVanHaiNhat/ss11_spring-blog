@@ -1,6 +1,9 @@
 package org.example.springblog.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,7 +15,8 @@ public class Blog {
     private String title;
     private String content;
     private String author;
-    private Date dayOfWrite;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dayOfWrite;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -53,11 +57,11 @@ public class Blog {
         this.author = author;
     }
 
-    public Date getDayOfWrite() {
+    public LocalDate getDayOfWrite() {
         return dayOfWrite;
     }
 
-    public void setDayOfWrite(Date dayOfWrite) {
+    public void setDayOfWrite(LocalDate dayOfWrite) {
         this.dayOfWrite = dayOfWrite;
     }
 
